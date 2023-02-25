@@ -1,7 +1,25 @@
-import {View} from 'react-native';
+import * as React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import IProduct from '../utils/interfaces/IProduct';
 
-function itemCard(): JSX.Element {
-  return <View></View>;
+type ItemCardProp = {
+  product: IProduct;
+};
+
+function ItemCard({product}: ItemCardProp): JSX.Element {
+  return (
+    <View>
+      <View>
+        <Text style={style.textStyle}>{product.name}</Text>
+      </View>
+    </View>
+  );
 }
 
-export default itemCard;
+const style = StyleSheet.create({
+  textStyle: {
+    color: 'black',
+  },
+});
+
+export default ItemCard;
