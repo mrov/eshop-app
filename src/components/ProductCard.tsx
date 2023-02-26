@@ -1,13 +1,7 @@
 import * as React from 'react';
-import {
-  Button,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import IProduct from '../utils/interfaces/IProduct';
+import {trimString} from '../utils/formatFunctions';
 
 type ProductCardProp = {
   product: IProduct;
@@ -20,23 +14,25 @@ function ProductCard({product}: ProductCardProp): JSX.Element {
     <View style={[styles.cardWrapper]}>
       <View>
         <Image
-          style={{width: 64, height: 64}}
+          style={{width: 100, height: 90}}
           source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
+            uri: product.img,
           }}></Image>
       </View>
       <View style={{display: 'flex', flexDirection: 'column', marginTop: 30}}>
         <View style={{display: 'flex', flexDirection: 'row'}}>
           <Text style={styles.labelText}>Nome: </Text>
-          <Text style={styles.textStyle}>{product.name}</Text>
+          <Text style={styles.textStyle}>
+            {trimString(product.announceName, 10)}
+          </Text>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>
-          <Text style={styles.labelText}>Nome: </Text>
-          <Text style={styles.textStyle}>{product.name}</Text>
+          <Text style={styles.labelText}>Preço: </Text>
+          <Text style={styles.textStyle}>{product.formattedPrice}</Text>
         </View>
         <View style={{display: 'flex', flexDirection: 'row'}}>
-          <Text style={styles.labelText}>Nome: </Text>
-          <Text style={styles.textStyle}>{product.name}</Text>
+          <Text style={styles.labelText}>KM: </Text>
+          <Text style={styles.textStyle}>{product.kilometer}</Text>
         </View>
         <TouchableOpacity
           accessibilityLabel="Learn more about this purple button"
@@ -58,7 +54,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'black',
     minWidth: '45%',
-    height: 250,
+    maxWidth: '45%',
+    paddingVertical: 10,
     marginTop: 20,
     marginHorizontal: 10,
   },
