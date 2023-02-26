@@ -10,6 +10,7 @@ export default interface IProduct {
   link: string;
   img: string;
   location: string;
+  inCart: boolean;
   postDate: {
     $date: Date;
   };

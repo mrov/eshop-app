@@ -1,14 +1,32 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import IProduct from '../utils/interfaces/IProduct';
-import {trimString} from '../utils/formatFunctions';
+import IProduct from '../shared/interfaces/IProduct';
+import {trimString} from '../shared/utils/formatFunctions';
+
+// contexts
+import {useCartDispatch} from '../shared/contexts/CartContext';
 
 type ProductCardProp = {
   product: IProduct;
+  inCart: Boolean;
 };
 
-function ProductCard({product}: ProductCardProp): JSX.Element {
-  function onPressHandler(): void {}
+function ProductCard({product, inCart}: ProductCardProp): JSX.Element {
+  const dispatch = useCartDispatch();
+
+  function onPressHandler(): void {
+    if (inCart) {
+      dispatch({
+        type: 'remove',
+        product: product,
+      });
+    } else {
+      dispatch({
+        type: 'add',
+        product: product,
+      });
+    }
+  }
 
   return (
     <View style={[styles.cardWrapper]}>
@@ -34,12 +52,21 @@ function ProductCard({product}: ProductCardProp): JSX.Element {
           <Text style={styles.labelText}>KM: </Text>
           <Text style={styles.textStyle}>{product.kilometer}</Text>
         </View>
-        <TouchableOpacity
-          accessibilityLabel="Learn more about this purple button"
-          style={styles.button}
-          onPress={onPressHandler}>
-          <Text style={styles.buttonText}>Adicionar</Text>
-        </TouchableOpacity>
+        {!inCart ? (
+          <TouchableOpacity
+            accessibilityLabel="Learn more about this purple button"
+            style={styles.button}
+            onPress={onPressHandler}>
+            <Text style={styles.addBtnText}>Adicionar</Text>
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            accessibilityLabel="Learn more about this purple button"
+            style={styles.buttonRed}
+            onPress={onPressHandler}>
+            <Text style={styles.removeBtnText}>Remover</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -74,9 +101,20 @@ const styles = StyleSheet.create({
     padding: 5,
     marginTop: 10,
   },
-  buttonText: {
+  buttonRed: {
+    alignItems: 'center',
+    backgroundColor: 'tomato',
+    padding: 5,
+    marginTop: 10,
+  },
+  addBtnText: {
     fontSize: 16,
     color: 'black',
+    fontWeight: '600',
+  },
+  removeBtnText: {
+    fontSize: 16,
+    color: 'white',
     fontWeight: '600',
   },
 });
