@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import ProductCard from '../components/ProductCard';
 
@@ -8,7 +8,7 @@ import {getProducts} from '../helpers/ProductsService';
 
 // contexts
 import {useCart} from '../shared/contexts/CartContext';
-import IProduct from '../shared/interfaces/IProduct';
+import {IProduct} from '../shared/interfaces/Product';
 
 const initialProductState: IProduct[] = [];
 
@@ -35,14 +35,7 @@ function ItemsList(): JSX.Element {
             <Text>Loading</Text>
           </View>
         ) : (
-          <View
-            style={{
-              flex: 1,
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              backgroundColor: 'white',
-            }}>
+          <View style={styles.productList}>
             {products.map((product, index) => {
               let inCart = false;
               if (
@@ -62,5 +55,15 @@ function ItemsList(): JSX.Element {
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  productList: {
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    backgroundColor: 'white',
+  },
+});
 
 export default ItemsList;

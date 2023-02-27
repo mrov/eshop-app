@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import IProduct from '../shared/interfaces/IProduct';
+import {IProduct} from '../shared/interfaces/Product';
 import {trimString} from '../shared/utils/formatFunctions';
 
 // contexts
