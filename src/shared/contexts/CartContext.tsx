@@ -34,7 +34,10 @@ export function useCartDispatch() {
   return useContext(CartDispatchContext);
 }
 
-function cartReducer(cartProducts: IProduct[], action: IAction) {
+function cartReducer(
+  cartProducts: IProduct[],
+  action: IAction,
+): IProduct[] | undefined {
   switch (action.type) {
     case 'add':
       return [...cartProducts, ...[action.product]];

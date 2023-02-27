@@ -20,7 +20,6 @@ function ItemsList(): JSX.Element {
   React.useEffect(() => {}, [cartList]);
 
   React.useEffect(() => {
-    // console.log(cartProducts);
     async function fetchProducts() {
       setLoading(true);
       let response = await getProducts();
@@ -44,6 +43,7 @@ function ItemsList(): JSX.Element {
               justifyContent: 'space-between',
               flexDirection: 'row',
               flexWrap: 'wrap',
+              backgroundColor: 'white',
             }}>
             {products.map((product, index) => {
               let inCart = false;

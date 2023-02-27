@@ -18,14 +18,17 @@ function App() {
   return (
     <NavigationContainer>
       <CartProvider>
-        <Header />
         <Stack.Navigator>
           <Stack.Screen
             name="ProductList"
             component={ProductList}
-            options={{headerShown: false}}
+            options={{title: 'Lista Produtos', headerRight: Header}}
           />
-          <Stack.Screen name="Cart" component={Cart} />
+          <Stack.Screen
+            name="Cart"
+            component={Cart}
+            options={{title: 'Carrinho', headerRight: Header}}
+          />
         </Stack.Navigator>
       </CartProvider>
     </NavigationContainer>
