@@ -1,9 +1,10 @@
-import axios from 'axios';
 import * as React from 'react';
 import {SafeAreaView, ScrollView, Text, View} from 'react-native';
-import {useNavigation, useRoute} from '@react-navigation/native';
 
 import ProductCard from '../components/ProductCard';
+
+// Helpers
+import {getProducts} from '../helpers/ProductsService';
 
 // contexts
 import {useCart} from '../shared/contexts/CartContext';
@@ -20,15 +21,13 @@ function ItemsList(): JSX.Element {
 
   React.useEffect(() => {
     // console.log(cartProducts);
-    axios
-      .get('http://192.168.0.7:5000/getCars')
-      .then(function (response) {
-        setProducts(response.data);
-        setLoading(false);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    async function fetchProducts() {
+      setLoading(true);
+      let response = await getProducts();
+      setProducts(response.data);
+      setLoading(false);
+    }
+    fetchProducts();
   }, []);
 
   return (
