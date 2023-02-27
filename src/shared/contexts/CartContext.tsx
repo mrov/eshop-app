@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {createContext, useContext, useReducer} from 'react';
-import IProduct from '../interfaces/Product';
+import {IProduct} from '../interfaces/Product';
 
 interface IAction {
   product: IProduct;
