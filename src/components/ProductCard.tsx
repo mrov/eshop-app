@@ -32,36 +32,37 @@ function ProductCard({product, inCart}: ProductCardProp): JSX.Element {
     <View style={[styles.cardWrapper]}>
       <View>
         <Image
-          style={{width: 100, height: 90}}
+          style={styles.image}
           source={{
             uri: product.img,
-          }}></Image>
+          }}
+        />
       </View>
-      <View style={{display: 'flex', flexDirection: 'column', marginTop: 30}}>
-        <View style={{display: 'flex', flexDirection: 'row'}}>
+      <View style={styles.bottomPart}>
+        <View style={styles.label}>
           <Text style={styles.labelText}>Nome: </Text>
           <Text style={styles.textStyle}>
             {trimString(product.announceName, 10)}
           </Text>
         </View>
-        <View style={{display: 'flex', flexDirection: 'row'}}>
+        <View style={styles.label}>
           <Text style={styles.labelText}>Preço: </Text>
           <Text style={styles.textStyle}>{product.formattedPrice}</Text>
         </View>
-        <View style={{display: 'flex', flexDirection: 'row'}}>
+        <View style={styles.label}>
           <Text style={styles.labelText}>KM: </Text>
           <Text style={styles.textStyle}>{product.kilometer}</Text>
         </View>
         {!inCart ? (
           <TouchableOpacity
-            accessibilityLabel="Learn more about this purple button"
+            accessibilityLabel="Add item Button"
             style={styles.button}
             onPress={onPressHandler}>
             <Text style={styles.addBtnText}>Adicionar</Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
-            accessibilityLabel="Learn more about this purple button"
+            accessibilityLabel="Remove item Button"
             style={styles.buttonRed}
             onPress={onPressHandler}>
             <Text style={styles.removeBtnText}>Remover</Text>
@@ -73,6 +74,9 @@ function ProductCard({product, inCart}: ProductCardProp): JSX.Element {
 }
 
 const styles = StyleSheet.create({
+  image: {width: 100, height: 90},
+  bottomPart: {display: 'flex', flexDirection: 'column', marginTop: 30},
+  label: {display: 'flex', flexDirection: 'row'},
   cardWrapper: {
     display: 'flex',
     justifyContent: 'center',
