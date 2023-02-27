@@ -17,8 +17,6 @@ function ItemsList(): JSX.Element {
   const [loading, setLoading] = React.useState(true);
   const cartList = useCart();
 
-  React.useEffect(() => {}, [cartList]);
-
   React.useEffect(() => {
     async function fetchProducts() {
       setLoading(true);
