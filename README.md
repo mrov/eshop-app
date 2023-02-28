@@ -2,7 +2,17 @@
 
 Challenge app for a job as front-end sênior
 
-### The back-end used in this project is the https://github.com/mrov/Usedcarscrawler!!!
+## Back-end
+
+### REST API
+The back-end is another project mine, the link is https://github.com/mrov/Usedcarscrawler
+
+### GIST
+
+if you dont want to run the back-end you can put the link of this gist: https://gist.github.com/mrov/f0080f612f1f20cf33a54a25f8bb85ee into the raw format
+the link of the raw format example: https://gist.githubusercontent.com/mrov/f0080f612f1f20cf33a54a25f8bb85ee/raw/342d9a6087f3cca28a021ee8838cf93311945423/cars.json
+
+## API calls file
 
 And you can set the IP into the ProductsService file to make the API call for the cars
 
