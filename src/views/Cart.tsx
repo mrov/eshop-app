@@ -24,7 +24,7 @@ function Cart(): JSX.Element {
     <SafeAreaView>
       <ScrollView>
         <View style={[styles.cartWrapper, {minHeight: windowHeight}]}>
-          <Text style={styles.selectedCars}>
+          <Text testID="selectedCarsLabel" style={styles.selectedCars}>
             {selectedCarsString(cartProducts.length)}
           </Text>
           {cartProducts.map(product => {
