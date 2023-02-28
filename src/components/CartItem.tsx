@@ -14,14 +14,16 @@ function CartItem({product}: ICartItemProp): JSX.Element {
         <Text style={styles.productTitle}>
           {trimString(product.announceName, 27)}
         </Text>
-        <TouchableOpacity
-          accessibilityLabel="Remove button"
-          style={styles.removeBtn}
-          onPress={() => {
-            dispatch({type: 'remove', product: product});
-          }}>
-          <Text style={styles.removeBtnText}>X</Text>
-        </TouchableOpacity>
+        <View style={{width: '10%'}}>
+          <TouchableOpacity
+            accessibilityLabel="Remove button"
+            style={styles.removeBtn}
+            onPress={() => {
+              dispatch({type: 'remove', product: product});
+            }}>
+            <Text style={styles.removeBtnText}>X</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -43,7 +45,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
   },
-  productTitle: {fontSize: 16, color: 'black', fontWeight: '500'},
+  productTitle: {
+    width: '88%',
+    fontSize: 16,
+    color: 'black',
+    fontWeight: '500',
+    paddingLeft: '2%',
+  },
   removeBtn: {
     display: 'flex',
     justifyContent: 'center',
