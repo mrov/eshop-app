@@ -10,8 +10,10 @@ export interface IProduct {
   link: string;
   img: string;
   location: string;
-  inCart: boolean;
   postDate: {
-    $date: Date;
+    $date: Date | string;
+  };
+  created: {
+    $date: Date | string;
   };
 }

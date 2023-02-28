@@ -29,7 +29,7 @@ function ProductCard({product, inCart}: ProductCardProp): JSX.Element {
   }
 
   return (
-    <View style={[styles.cardWrapper]}>
+    <View testID={product._id} style={[styles.cardWrapper]}>
       <View>
         <Image
           style={styles.image}
@@ -41,17 +41,21 @@ function ProductCard({product, inCart}: ProductCardProp): JSX.Element {
       <View style={styles.bottomPart}>
         <View style={styles.label}>
           <Text style={styles.labelText}>Nome: </Text>
-          <Text style={styles.textStyle}>
+          <Text testID="announceNameId" style={styles.textStyle}>
             {trimString(product.announceName, 10)}
           </Text>
         </View>
         <View style={styles.label}>
           <Text style={styles.labelText}>Preço: </Text>
-          <Text style={styles.textStyle}>{product.formattedPrice}</Text>
+          <Text testID="priceId" style={styles.textStyle}>
+            {product.formattedPrice}
+          </Text>
         </View>
         <View style={styles.label}>
           <Text style={styles.labelText}>KM: </Text>
-          <Text style={styles.textStyle}>{product.kilometer}</Text>
+          <Text testID="kmId" style={styles.textStyle}>
+            {product.kilometer}
+          </Text>
         </View>
         {!inCart ? (
           <TouchableOpacity

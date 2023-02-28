@@ -21,7 +21,7 @@ function ItemsList(): JSX.Element {
     async function fetchProducts() {
       setLoading(true);
       let response = await getProducts();
-      setProducts(response.data);
+      setProducts(response);
       setLoading(false);
     }
     fetchProducts();
@@ -31,11 +31,11 @@ function ItemsList(): JSX.Element {
     <SafeAreaView>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         {loading ? (
-          <View>
+          <View testID="loadingView">
             <Text>Loading</Text>
           </View>
         ) : (
-          <View style={styles.productList}>
+          <View testID="listView" style={styles.productList}>
             {products.map((product, index) => {
               let inCart = false;
               if (
