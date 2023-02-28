@@ -1,11 +1,12 @@
 import * as React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {useCart} from '../shared/contexts/CartContext';
-import {useNavigation} from '@react-navigation/native';
+import {ParamListBase, useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 function Header(): JSX.Element {
   const cartProducts = useCart();
-  const nav = useNavigation();
+  const nav = useNavigation<NativeStackNavigationProp<ParamListBase>>();
 
   return (
     <TouchableOpacity
