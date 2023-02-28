@@ -88,15 +88,15 @@ const styles = StyleSheet.create({
     maxWidth: '45%',
     paddingVertical: 10,
     marginTop: 20,
-    marginHorizontal: 10,
+    marginHorizontal: '2%',
   },
   textStyle: {
     color: 'black',
-    fontSize: 18,
+    fontSize: 16,
   },
   labelText: {
     color: 'black',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500',
   },
   button: {

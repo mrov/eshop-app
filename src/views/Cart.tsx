@@ -1,10 +1,13 @@
 import * as React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, StyleSheet, SafeAreaView, ScrollView, View} from 'react-native';
 import CartItem from '../components/CartItem';
 import {useCart} from '../shared/contexts/CartContext';
+import {Dimensions} from 'react-native';
 
 function Cart(): JSX.Element {
   const cartProducts = useCart();
+
+  const windowHeight = Dimensions.get('window').height;
 
   function selectedCarsString(cartLength: number) {
     if (cartLength === 1) {
@@ -18,14 +21,18 @@ function Cart(): JSX.Element {
   }
 
   return (
-    <View style={styles.cartWrapper}>
-      <Text style={styles.selectedCars}>
-        {selectedCarsString(cartProducts.length)}
-      </Text>
-      {cartProducts.map(product => {
-        return <CartItem key={product._id} product={product} />;
-      })}
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={[styles.cartWrapper, {minHeight: windowHeight}]}>
+          <Text style={styles.selectedCars}>
+            {selectedCarsString(cartProducts.length)}
+          </Text>
+          {cartProducts.map(product => {
+            return <CartItem key={product._id} product={product} />;
+          })}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
