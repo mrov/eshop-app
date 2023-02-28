@@ -60,16 +60,22 @@ function ProductCard({product, inCart}: ProductCardProp): JSX.Element {
         {!inCart ? (
           <TouchableOpacity
             accessibilityLabel="Add item Button"
+            testID="addItemButton"
             style={styles.button}
             onPress={onPressHandler}>
-            <Text style={styles.addBtnText}>Adicionar</Text>
+            <Text testID="addItemButtonLabel" style={styles.addBtnText}>
+              Adicionar
+            </Text>
           </TouchableOpacity>
         ) : (
           <TouchableOpacity
             accessibilityLabel="Remove item Button"
+            testID="removeItemButton"
             style={styles.buttonRed}
             onPress={onPressHandler}>
-            <Text style={styles.removeBtnText}>Remover</Text>
+            <Text testID="removeItemButtonLabel" style={styles.removeBtnText}>
+              Remover
+            </Text>
           </TouchableOpacity>
         )}
       </View>

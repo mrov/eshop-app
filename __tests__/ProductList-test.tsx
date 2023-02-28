@@ -1,13 +1,9 @@
-/**
- * @format
- */
-
 import 'react-native';
 import React from 'react';
 import ProductList from '../src/views/ProductList';
 
 // Note: test renderer must be required after react-native.
-import {render} from '@testing-library/react-native';
+import {act, fireEvent, render} from '@testing-library/react-native';
 import {IProduct} from '../src/shared/interfaces/Product';
 import {CartProvider} from '../src/shared/contexts/CartContext';
 
@@ -53,4 +49,31 @@ it('render product List correctly', async () => {
   const item = await wrapper.findByTestId(_id);
 
   expect(item).toBeTruthy();
+});
+
+it('expect to add product to cart', async () => {
+  const wrapper = render(
+    <CartProvider>
+      <ProductList />
+    </CartProvider>,
+  );
+
+  const item = await wrapper.findByTestId(_id);
+
+  expect(item).toBeTruthy();
+
+  let addItemButton = await wrapper.findByTestId('addItemButton');
+  let removeItemButton = await wrapper.queryByTestId('removeItemButton');
+
+  expect(addItemButton).toBeTruthy();
+  expect(removeItemButton).toBeNull();
+
+  act(() => {
+    fireEvent.press(addItemButton);
+  });
+
+  removeItemButton = await wrapper.queryByTestId('removeItemButton');
+
+  expect(await wrapper.queryByTestId('addItemButton')).toBeNull();
+  expect(removeItemButton).toBeTruthy();
 });
