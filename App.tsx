@@ -1,26 +1,36 @@
 // In App.js in a new project
 
 import * as React from 'react';
-import {View, Text} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
+import Header from './src/components/Header';
+
+import ProductList from './src/views/ProductList';
+import Cart from './src/views/Cart';
+
+// contexts
+import {CartProvider} from './src/shared/contexts/CartContext';
 
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
+      <CartProvider>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="ProductList"
+            component={ProductList}
+            options={{title: 'Lista Produtos', headerRight: Header}}
+          />
+          <Stack.Screen
+            name="Cart"
+            component={Cart}
+            options={{title: 'Carrinho', headerRight: Header}}
+          />
+        </Stack.Navigator>
+      </CartProvider>
     </NavigationContainer>
   );
 }
