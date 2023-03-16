@@ -1,5 +1,12 @@
 import * as React from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  FlatList,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import ProductCard from '../components/ProductCard';
 
@@ -29,29 +36,29 @@ function ItemsList(): JSX.Element {
 
   return (
     <SafeAreaView>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        {loading ? (
-          <View testID="loadingView">
-            <Text>Loading</Text>
-          </View>
-        ) : (
-          <View testID="listView" style={styles.productList}>
-            {products.map((product, index) => {
-              let inCart = false;
-              if (
-                cartList.some(item => {
-                  return item._id === product._id;
-                })
-              ) {
-                inCart = true;
-              }
-              return (
-                <ProductCard key={index} inCart={inCart} product={product} />
-              );
-            })}
-          </View>
-        )}
-      </ScrollView>
+      {loading ? (
+        <View testID="loadingView">
+          <Text>Loading</Text>
+        </View>
+      ) : (
+        <FlatList
+          data={products}
+          numColumns={2}
+          columnWrapperStyle={styles.productList}
+          renderItem={({item, index}) => {
+            let inCart = false;
+            if (
+              cartList.some(cartItem => {
+                return item._id === cartItem._id;
+              })
+            ) {
+              inCart = true;
+            }
+            return <ProductCard key={index} inCart={inCart} product={item} />;
+          }}
+          keyExtractor={(item: IProduct) => item._id}
+        />
+      )}
     </SafeAreaView>
   );
 }
@@ -59,7 +66,7 @@ function ItemsList(): JSX.Element {
 const styles = StyleSheet.create({
   productList: {
     flex: 1,
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     flexDirection: 'row',
     flexWrap: 'wrap',
     backgroundColor: 'white',
